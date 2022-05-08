@@ -13,5 +13,8 @@
     "node"
   ],
   "author": "FabianGarciaXY",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.18.1"
+  }
 }
