@@ -74,4 +74,38 @@ const prisma = new PrismaClient();
   finally {
     prisma.$disconnect();
   }
+});
+
+(async function main() {
+  try {
+    const user0 = await prisma.user.upsert({
+      where: {name: 'User0'},
+      update: {},
+      create: {
+        name: 'User0',
+        lang: 'Es', 
+        missionComander: 'Carlo',
+        enrollments: 1,
+        hasCertification: true
+      }
+    });
+
+    const user1 = await prisma.user.upsert({
+      where: {name : 'User1'},
+      update: {},
+      create: {
+        name: 'User1',
+        lang: 'Esp',
+        missionComander: 'Carlo',
+        enrollments: 2,
+        hasCertification: true
+      }   
+    });
+  }  
+  catch (error){
+    console.log(error);  
+  }
+  finally {
+    prisma.$disconnect();
+  }
 }) ();
