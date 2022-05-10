@@ -59,6 +59,15 @@ app.delete('/explorers/:id', async (req, res) => {
 });
 
 
+// Endpoints para la nueva tabla
+app.get('/users', async (req, res) => {
+  const users = await prisma.user.findMany({});
+  res.status(200).json(users);
+});
+
+
+
+
 app.listen(port, () => {
   console.log(`Listening in port ${port}`);
 });
