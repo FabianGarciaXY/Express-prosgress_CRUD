@@ -100,6 +100,12 @@ app.put('/users/:id', async (req, res) => {
   return res.json({message: "Status de certificación actualizado"});
 });
 
+app.delete('/users/:id', async(req, res) => {
+  const id = parseInt(req.params.id);
+  await prisma.user.delete({ where: { id: id}});
+  return res.json({message: "User deleted correctly"});
+});
+
 app.listen(port, () => {
   console.log(`Listening in port ${port}`);
 });
