@@ -85,6 +85,21 @@ app.post('/users', async (req, res) => {
 });
 
 
+app.put('/users/:id', async (req, res) => {
+  const id = req.params.id
+  
+  await prisma.user.update({
+    where: {
+      id: parseInt(id)
+    }, 
+    data: {
+      hasCertification: req.body.hasCertification
+    }
+  });
+
+  return res.json({message: "Status de certificación actualizado"});
+});
+
 app.listen(port, () => {
   console.log(`Listening in port ${port}`);
 });
