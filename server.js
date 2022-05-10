@@ -65,7 +65,24 @@ app.get('/users', async (req, res) => {
   res.status(200).json(users);
 });
 
+app.get('/users/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await prisma.user.findUnique({ where: { id : parseInt(id)}});
+  res.status(200).json(user);
+});
 
+app.post('/users', async (req, res) => {
+  const newUser = {
+    name: req.body.name,
+    lang: req.body.lang,
+    missionComander: req.body.missionComander,
+    enrollments: req.body.enrollments,
+    hasCertification: req.body.hasCertification
+  }
+  const message = 'Usuario nuevo creado';
+  await prisma.user.create({ data: newUser });
+  return res.json({message});
+});
 
 
 app.listen(port, () => {
