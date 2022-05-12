@@ -9,11 +9,8 @@ const prisma = new PrismaClient();
 
 // C O R S 
 const cors = require('cors');
-const corsOptions = {
-  origin: "http://localhost:8081"
-};
+const corsOptions = { origin: "http://localhost:8081" };
 app.use(cors(corsOptions));
-
 
 
 app.get('/', (req, res) => {
@@ -22,15 +19,13 @@ app.get('/', (req, res) => {
 
 app.get('/explorers', async (req, res) => {
   const allExplorers = await prisma.explorer.findMany({});
-  res.status(200).json({
-    allExplorers
-  });
+  res.json({allExplorers});
 });
 
 app.get('/explorers/:id', async (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   const explorer = await prisma.explorer.findUnique({
-    where: {id: parseInt(id)}
+    where: {id: id}
   });
   res.status(200).json(explorer);
 });
